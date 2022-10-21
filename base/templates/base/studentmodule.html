@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Module</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'stylestntmodule1.css' %}">
+</head>
+<body class="header">
+    <div class="students">
+        <div class="students1" data-progress-text="100%" data-progress="99%" style="transform: translate3d(100%,0px,0px);">
+        <div class="progress"></div>
+        </div>
+        <div class="pace-activity"></div>
+
+    </div>
+    <header class="navbar">
+        <button class="sidebar"type="button">
+            <span class="navbar-toggler"></span>
+            <a class="navbr-brand" href=""></a>
+            <button class="navbar-toggler-sidebar" type="button">
+                <span class="navbar-toggler"></span>
+
+            </button>
+            <ul class="nav">
+                
+            </ul>
+            <span class="navbar-text">
+                <strong> </strong>
+            </span>
+            <ul class="nav">
+                <li class="nav-item2">
+                    <a class="nav-link" href="">
+                        <i class="icon-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item2">
+                    <button data-toggle="modal" data-target="#modal-logout" class="btn-link"><span class="sign-out"></span><div class="logout">Logout</div> </button>                
+                    
+
+                </li>
+            </ul>
+           
+    </header>
+    <div id="app" class="app-body"><div id="modal-logout" tabindex="-1" role="dialog" aria-labelledby="Logout" aria-hidden="true" class="modal fade">
+        <div role="document" class="modal-dialog"><div class="modal-content"><div class="modal-header"> 
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true"></span>
+    </button>
+</div>
+ <div class="modal-body">
+</div> <div class="modal-footer">
+         <form action="" method="POST">
+            <input type="hidden" name="_token" value="JLJTaHTFMWjvMECMbKXpVmH3VeQxbCjQpxZqyllZ"> 
+    </form></div></div></div></div> <div class="sidebar"><nav class="sidebar-nav"><ul class="nav"><li class="nav-item">
+        <a href="" class="nav-link">
+        <i class="icon-graph"></i> <div class="dashboard">Dashboard</div> </a></li> 
+        <br>
+        <li class="nav-title">STUDENT MENU</li>
+        <br>
+         <li class="nav-item"><a href="" class="nav-link">
+            <i class="icon-list"></i><div class="profile">Profile</div>  </a></li> <li class="nav-item">
+        <a href="" class="nav-link"><i class="icon-list">
+
+    </i><div class="attachment"> My Attachments</div> </a></li></ul></nav> <button type="button" class="sidebar-minimizer brand-minimizer">
+    
+    </i><div class="attachment"> <a href="{%url 'linkorg' %}">Link with organizations</a></div> </a></li></ul></nav> <button type="button" class="sidebar-minimizer brand-minimizer"></button>
+
+    </button></div> <main class="main"></main></div>
+      <footer class="app-footer">
+          <span>© <a href="" target="_blank">Strathmore University</a> 2022.</span>
+      </footer>
+
+
+    
+</body>
+</html>

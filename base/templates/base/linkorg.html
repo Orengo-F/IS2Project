@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attachment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'linkedin.css' %}">
+</head>
+<body>
+     
+    {% for messege in messages %}
+    <div class="alert1" role="alert">
+    <strong>Message:</strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hiddenn="true">&times;</span>
+    </button>
+    </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <h3>Hello {{ user.first_name }}</h3>
+    <h4>You are Successfully logged in.</h4>
+
+    {% else %}
+    <a href="{%url 'register' %}"></a>
+    {% endif %}
+
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="linkorg.html" class="logo">{% load static %}<img src="{% static 'images/logo.jpg' %}"></a>
+
+            <div class="search-box">
+                <img src="{% static 'images/search.png' %}">
+                <input type="text" placeholder="Search">
+            </div>
+
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="#" class="active-link"><img src="{% static 'images/home.png' %}"><span>Home</span></a></li>
+                <li><a href="#"><img src="{% static 'images/network.png' %}"><span>My Networks</span></a></li>
+                <li><a href="#"><img src="{% static 'images/jobs.png' %}"><span>Jobs</span></a></li>
+                <li><a href="#"><img src="{% static 'images/message.png' %}"><span>Messaging</span></a></li>
+                <li><a href="#"><img src="{% static 'images/notification.png' %}"><span>Notifications</span></a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <div class="online">
+                <img src="{{user_profile.profileimg.url}}" class="nav-profile-img" onclick="toggleMenu()">
+            </div>
+        </div>
+<!----------------profile-drop-down-menu---------->
+<div class="profile-menu-warp" id="profileMenu">
+    <div class="profile-menu">
+        <div class="user-info">
+            <img src="{{user_profile.profileimg.url}}">
+            <div>
+                <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                <br>
+                
+    
+                <a href="{%url 'linkinprofile' %}">See your profile</a>
+            </div>
+        </div>
+        <hr>
+        <a href="#" class="profile-menu-link">
+            <img src="{% static 'images/feedback.png' %}">
+            <p>Give Feedback</p>
+            <span>></span>
+        </a>
+        <a href="{%url 'settings' %}" class="profile-menu-link">
+            <img src="{% static 'images/setting.png' %}">
+            <p>Settings & Privacy</p>
+            <span>></span>
+        </a>
+        <a href="#" class="profile-menu-link">
+            <img src="{% static 'images/help.png' %}">
+            <p>Help & Support</p>
+            <span>></span>
+        </a>
+        <a href="#" class="profile-menu-link">
+            <img src="{% static 'images/display.png' %}">
+            <p>Display and Accessibility</p>
+            <span>></span>
+        </a>
+        <a href="logout" class="profile-menu-link">
+            <img src="{% static 'images/logout.png' %}">
+            <p>Logout</p>
+            <span>></span>
+        </a>
+    </div>
+</div>
+
+
+
+
+    </nav>
+
+
+    <!----------------navbar close ---------------->
+   <div class="container">
+    <div class="left-sidebar">
+        <div class="sidebar-profile-box">
+            <img src="{{user_profile.profileimg.url}}" width="100%">
+            <div class="sidebar-profile-info">
+                <img src="{{user_profile.profileimg.url}}">
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <h3>Student at Strathmore University</h3>
+                <ul>
+                    <li>Your profile views <span>0</span></li>
+                    <li>Your post views <span>0</span></li>
+                    <li>Your connections views <span>0</span></li>
+                    <li>Number of posts<span>{{ user_post_length }}</span></li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="sidebar-profile-link">
+                <a href="#"><img src="{% static 'images/items.png' %}">My items</a>
+                <a href="#"><img src="{% static 'images/premium.png' %}">Try premium</a>
+            </div>
+        </div>
+        <div class="sidebar-activity">
+            <h3>RECENT</h3>
+            <a href="#"><img src="{% static 'images/recent.png' %}">Web Development</a>
+            <a href="#"><img src="{% static 'images/recent.png' %}">User interface</a>
+            <a href="#"><img src="{% static 'images/recent.png' %}">Online Learning</a>
+            <a href="#"><img src="{% static 'images/recent.png' %}">Code Better</a>
+            <a href="#"><img src="{% static 'images/recent.png' %}">Group Learning</a>
+            <h3>GROUPS</h3>
+            <a href="#"><img src="{% static 'images/group.png' %}">Web Design Group</a>
+            <a href="#"><img src="{% static 'images/group.png' %}">HTML & CSS Learners</a>
+            <a href="#"><img src="{% static 'images/group.png' %}">Python & JavaScript Group</a>
+            <a href="#"><img src="{% static 'images/group.png' %}">Learn Coding Online</a>
+            <h3>HASHTAG</h3>
+            <a href="#"><img src="{% static 'images/hashtag.png' %}">webdevelopment</a>
+            <a href="#"><img src="{% static 'images/hashtag.png' %}">userinterface</a>
+            <a href="#"><img src="{% static 'images/hashtag.png' %}">onlinelearnig</a>
+            <div class="discover-more-link">
+                <a href="#">Discover more</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <div class="create-post">
+            <form action="upload" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="create-post-input">
+                <img src="{{user_profile.profileimg.url}}">
+                <textarea rows="2" placeholder="Write a post" class="post_comment" name="caption"></textarea>
+            </div>
+        
+                <div class="create-post-links">
+                    <li><img src="{% static 'images/photo.png' %}"><input type="file" name="image_upload" name="caption">Photo</li>
+                    <li><img src="{% static 'images/video.png' %}">Video</li>
+                    <li><img src="{% static 'images/event.png' %}">Event</li>
+                    <button class="postsubmit" type="submit">Post</button>
+                </div>
+            </form>
+        </div>
+        <div class="sort-by">
+            <hr>
+            <p>Sort by: <span>top <img src="{% static 'images/down-arrow.png' %}"></span></p>
+        </div>
+        {% for post in posts reversed %}
+        <div class="post">
+            <div class="post-author">
+                <img src="{% static 'images/user-3.png' %}">
+                <div>
+                    <h1><a href="#">{{post.user}}</a></h1>
+                    <small>Developer of the game Running Aj | Game Developer</small>
+                    <small>2 hours ago</small>
+                </div>
+            </div>
+            <p><a href="#"><strong>{{post.user}}</strong></a> {{post.caption}}
+            </p> 
+            <img src="{{post.image.url}}"  width="100%"> 
+            <div class="post-stats">
+                <div>
+                    <img src="{% static 'images/thumbsup.png' %}">
+                    <img src="{% static 'images/love.png' %}">
+                    <img src="{% static 'images/clap.png' %}">
+                    <span class="liked-users">
+                        {% if post.no_of_likes == 0 %}
+                        <p>No Likes</p>
+                        {% elif post.no_of_likes == 1 %}
+                        <p>Liked by {{post.no_of_likes}} person</p>
+                        {% else %}
+                        <p>Liked by {{post.no_of_likes}} people</p>
+                        {% endif %}
+                    
+                    
+                    </span>
+                </div>
+                <div>
+                    <span>0 coments &middot; 0 shares</span>
+                </div> 
+
+            </div> 
+            <div class="post-activity">
+                <div>
+                    <img src="{{user_profile.profileimg.url}}" class="post-activity-user-icon" >
+                    <img src="{% static 'images/down-arrow.png' %}" class="post-activity-arrow-icon" >
+
+                </div>
+                <div class="post-activity-link">
+                    <a href="/like-post?post_id={{post.id}}"><img src="{% static 'images/like.png' %}"></a>
+                    <span>Like</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/comment.png' %}">
+                    <span>Comment</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/share.png' %}">
+                    <span>Share</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/send.png' %}">
+                    <span>Send</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="post">
+            <div class="post-author">
+                <img src="{% static 'images/user-4.png' %}">
+                <div>
+                    <h1>Presley Omeru</h1>
+                    <small>Developer of the game Running Aj | Game Developer</small>
+                    <small>2 hours ago</small>
+                </div>
+            </div>
+            <p>A great profile makes you to be noticed, hence more connections with organizations. If you you have
+                more connections than your peersthen you will be ahead
+            </p> 
+           <img src="{% static 'images/post-image-2.png' %}"  width="100%"> 
+            <div class="post-stats">
+                <div>
+                    <img src="{% static 'images/thumbsup.png' %}">
+                    <img src="{% static 'images/love.png' %}">
+                    <img src="{% static 'images/clap.png' %}">
+                    <span class="liked-users">Audrey Orengo and 1 other</span>
+                </div>
+                <div>
+                    <span>0 coments &middot; 0 shares</span>
+                </div> 
+
+            </div> 
+            <div class="post-activity">
+                <div>
+                    <img src="{{user_profile.profileimg.url}}" class="post-activity-user-icon" >
+                    <img src="{% static 'images/down-arrow.png' %}" class="post-activity-arrow-icon" >
+
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/like.png' %}">
+                    <span>Like</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/comment.png' %}">
+                    <span>Comment</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/share.png' %}">
+                    <span>Share</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/send.png' %}">
+                    <span>Send</span>
+                </div>
+            </div>
+        </div>
+        <div class="post">
+            <div class="post-author">
+                <img src="{% static 'images/user-3.png' %}">
+                <div>
+                    <h1>John Doe</h1>
+                    <small>Developer of the game Running Aj | Game Developer</small>
+                    <small>2 hours ago</small>
+                </div>
+            </div>
+            <p>A great profile makes you to be noticed, hence more connections with organizations. If you you have
+                more connections than your peersthen you will be ahead
+            </p> 
+            <img src="{% static 'images/post-image-3.png' %}"  width="100%"> 
+            <div class="post-stats">
+                <div>
+                    <img src="{% static 'images/thumbsup.png' %}">
+                    <img src="{% static 'images/love.png' %}">
+                    <img src="{% static 'images/clap.png' %}">
+                    <span class="liked-users">Audrey Orengo and 1 other</span>
+                </div>
+                <div>
+                    <span>0 coments &middot; 0 shares</span>
+                </div> 
+
+            </div> 
+            <div class="post-activity">
+                <div>
+                    <img src="{{user_profile.profileimg.url}}" class="post-activity-user-icon" >
+                    <img src="{% static 'images/down-arrow.png' %}" class="post-activity-arrow-icon" >
+
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/like.png' %}">
+                    <span>Like</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/comment.png' %}">
+                    <span>Comment</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/share.png' %}">
+                    <span>Share</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/send.png' %}">
+                    <span>Send</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-author">
+                <img src="{% static 'images/user-3.png' %}">
+                <div>
+                    <h1>John Doe</h1>
+                    <small>Developer of the game Running Aj | Game Developer</small>
+                    <small>2 hours ago</small>
+                </div>
+            </div>
+            <p>A great profile makes you to be noticed, hence more connections with organizations. If you you have
+                more connections than your peersthen you will be ahead
+            </p> 
+            <img src="{% static 'images/post-image-4.png' %}"  width="100%"> 
+            <div class="post-stats">
+                <div>
+                    <img src="{% static 'images/thumbsup.png' %}">
+                    <img src="{% static 'images/love.png' %}">
+                    <img src="{% static 'images/clap.png' %}">
+                    <span class="liked-users">Audrey Orengo and 1 other</span>
+                </div>
+                <div>
+                    <span>0 coments &middot; 0 shares</span>
+                </div> 
+
+            </div> 
+            <div class="post-activity">
+                <div>
+                    <img src="{{user_profile.profileimg.url}}" class="post-activity-user-icon" >
+                    <img src="{% static 'images/down-arrow.png' %}" class="post-activity-arrow-icon" >
+
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/like.png' %}">
+                    <span>Like</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/comment.png' %}">
+                    <span>Comment</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/share.png' %}">
+                    <span>Share</span>
+                </div>
+                <div class="post-activity-link">
+                    <img src="{% static 'images/send.png' %}">
+                    <span>Send</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="right-sidebar">
+        <div class="sidebar-news">
+            <img src="{% static 'images/more.png' %}" class="info-icon">
+            <h3>Trending News</h3>
+            <a href="https://www.stridelearning.com/insights/most-in-demand-internships-IT.html">High demand for IT interns</a>
+            <span>1d ago &middot; 0 readers</span>
+
+            <a href="https://www.ibm.com/ibm/responsibility/2015/communities/skills_based_volunteering.html">IBM is looking for student volunteers</a>
+            <span>1h ago &middot; 0 readers</span>
+
+            <a href="https://scholarshipamerica.org/partners/scholarship-solutions/?utm_campaign=L_CD-Start-A-Scholarship-Dyn_B_JT&utm_medium=ppc&utm_term=&utm_source=adwords&hsa_kw=&hsa_acc=6301232930&hsa_mt=&hsa_net=adwords&hsa_src=g&hsa_cam=17844291295&hsa_ver=3&hsa_tgt=dsa-1696604662973&hsa_ad=612418492297&hsa_grp=138981033963&gclid=CjwKCAjwqJSaBhBUEiwAg5W9p4A1pX93Cuf-j5lRpcpcfdGOiqky5BacwSKKvBhqowF47aTa2UxD5RoCM-IQAvD_BwE">Get scholarships to US</a>
+            <span>5d ago &middot; 0 readers</span>
+
+            <a href="#">Great profile = Great internship and job opportunity?</a>
+            <span>18d ago &middot; 0 readers</span>
+
+            <a href="#">Felix Orengo, the story of how he made it</a>
+            <span>12h ago &middot; 0 readers</span>
+
+            <a href="#" class="read-more-link">Read More</a>
+        </div>
+        <div class="sidebar-ad">
+            <small>Ad &middot; &middot; &middot;</small>
+            <br>
+            <p>Master the 5 principles of web design</p>
+            <div>
+                <img src="{% static 'images/user-1.png' %}">
+                <img src="{% static 'images/mi-logo.png' %}">
+            </div>
+            <b>Intake ongoing - Masters in IT</b>
+            <a href="#" class="ad-link">Learn More</a>
+        </div>
+        <div class="sidebar-useful-links">
+            <a href="#">About</a>
+            <a href="#">Accessibility</a>
+            <a href="#">Help Center</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Advertising</a>
+            <a href="#">Get the App</a>
+            <a href="#">More</a>
+
+            <div class="copyright-msg">
+                <img src="{% static 'images/logo.jpg' %}">
+                <p>Strathmore University &#169; 2022.All rights reserved</p>
+            </div>
+        </div>
+
+
+
+
+   </div>
+   <script>
+    let profileMenu = document.getElementById("profileMenu")
+
+    function toggleMenu(){
+        profileMenu.classList.toggle("open-menu")
+    }
+   </script>
+   
+</body>
+</html>

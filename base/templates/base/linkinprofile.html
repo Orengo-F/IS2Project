@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attachment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'linkedin.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="{%url 'linkorg' %}" class="logo">{% load static %}<img src="{% static 'images/logo.jpg' %}"></a>
+
+            <div class="search-box">
+                <img src="{% static 'images/search.png' %}">
+                <input type="text" placeholder="Search">
+            </div>
+
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="#" class="active-link"><img src="{% static 'images/home.png' %}"><span>Home</span></a></li>
+                <li><a href="#"><img src="{% static 'images/network.png' %}"><span>My Networks</span></a></li>
+                <li><a href="#"><img src="{% static 'images/jobs.png' %}"><span>Jobs</span></a></li>
+                <li><a href="#"><img src="{% static 'images/message.png' %}"><span>Messaging</span></a></li>
+                <li><a href="#"><img src="{% static 'images/notification.png' %}"><span>Notifications</span></a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <div class="online">
+                <img src="{{user_profile.profileimg.url}}" class="nav-profile-img" onclick="toggleMenu()">
+            </div>
+        </div>
+<!----------------profile-drop-down-menu---------->
+<div class="profile-menu-warp" id="profileMenu">
+    <div class="profile-menu">
+        <div class="user-info">
+            <img src="{{user_profile.profileimg.url}}">
+            <div>
+                <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                <br>
+                
+                {% load static %}    
+                <a href="{%url 'linkinprofile' %}">See your profile</a>
+            </div>
+        </div>
+        <hr>
+        <a href="#" class="profile-menu-link">
+            <img src="{% static 'images/feedback.png' %}">
+            <p>Give Feedback</p>
+            <span>></span>
+        </a>
+        <a href="{%url 'settings' %}" class="profile-menu-link">
+            <img src="{% static 'images/setting.png' %}">
+            <p>Settings & Privacy</p>
+            <span>></span>
+        </a>
+        <a href="#" class="profile-menu-link">
+            <img src="{% static 'images/help.png' %}">
+            <p>Help & Support</p>
+            <span>></span>
+        </a>
+        <a href="#" class="profile-menu-link">
+            <img src="{% static 'images/display.png' %}">
+            <p>Display and Accessibility</p>
+            <span>></span>
+        </a>
+        <a href="logout" class="profile-menu-link">
+            <img src="{% static 'images/logout.png' %}">
+            <p>Logout</p>
+            <span>></span>
+        </a>
+    </div>
+</div>
+
+
+
+
+    </nav>
+
+
+    <!----------------navbar close ---------------->
+<div class="container">
+    <div class="profile-main">
+        <div class="profile-container">
+            <img src="{{user_profile.profileimg.url}}" width="100%">
+            <div class="profile-container-inner">
+                <img src="{{user_profile.profileimg.url}}" class="profile-pic">
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <b>Student at Strathmore University | BBIT</b>
+                <p>Nairobi, Kenya &middot; <a href="#">Contact info</a></p>
+                <div class="mutual-connection">
+                    <img src="{% static 'images/user-2.png' %}" >
+                    <span>1 mutual connection: John Doe</span>
+                </div>
+                <div class="profile-btn">
+                    <a href="#" class="primary-btn"><img src="{% static 'images/connect.png' %}">Connect</a>
+                    <a href="#"><img src="{% static 'images/chat.png' %}">Message</a>
+                </div>
+            </div>
+        </div>
+        <div class="profile-description">
+            <h2>About</h2>
+            <p>{{user_profile.about}}</p>
+                <a href="#" class="see-more-link">See more...</a>
+
+        </div>
+
+        <div class="profile-description">
+            <h2>Experience</h2>
+            <div class="profile-desc-row">
+                <img src="{% static 'images/microsoft.png' %}">
+                <div>
+                    <h3>Front-End Developer</h3>
+                    <b>Microsoft &middot; Full-time</b>
+                    <b>Sept 2022 - Present &middot; 1.5 years</b>
+                    <p>Computer programming starts from coding 'Hello World'</p>
+                    <hr>
+                </div>
+            </div>
+            <div class="profile-desc-row">
+                <img src="{% static 'images/slack.png' %}">
+                <div>
+                    <h3>Full Stack Developer</h3>
+                    <b>Slack &middot; Full-time</b>
+                    <b>July 2020 - Present &middot; 1 year</b>
+                    <p>Computer programming starts from coding 'Hello World'</p>
+                    <hr>
+                </div>
+            </div>
+            <div class="profile-desc-row">
+                <img src="{% static 'images/google.png' %}">
+                <div>
+                    <h3>Web Developer</h3>
+                    <b>Google &middot; Full-time</b>
+                    <b>Jan 2028 - Present &middot; 2 years</b>
+                    <p>Computer programming starts from coding 'Hello World'</p>
+                </div>
+            </div>
+            <hr><a href="#" class="experience-link">Show all 7 experiences <img src="{% static 'images/right-arrow.png' %}"></a>
+        </div>
+        <div class="profile-description">
+            <h2>Education</h2>
+            <div class="profile-desc-row">
+                <img src="{% static 'images/logo.jpg' %}">
+                <div>
+                    <h3>Strathmore University</h3>
+                    <b>BBIT, Bachelor of Business Information Technology</b>
+                    <b>2019 - 2023</b>
+                    <hr>
+
+                </div>
+            </div>
+            <div class="profile-desc-row">
+                <img src="{% static 'images/north.png' %}">
+                <div>
+                    <h3>Agoro Sare High School</h3>
+                    <b>Secondary Education</b>
+                    <b>2015 - 2018</b>
+                    <hr>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="profile-description">
+            <h2>Skills</h2>
+            <a href="#" class="skills-btn">Leadership</a>
+            <a href="#" class="skills-btn">Game programming</a>
+            <a href="#" class="skills-btn">Problem-solving ability</a>
+            <a href="#" class="skills-btn">Comunication</a>
+            <a href="#" class="skills-btn">Web development</a>
+            <a href="#" class="skills-btn">Cloud computing</a>
+        </div>
+        <div class="profile-description">
+            <h2>Languages</h2>
+            <a href="#" class="language-btn">English</a>
+            <a href="#" class="language-btn">French</a>
+            <a href="#" class="language-btn">Swahili</a>
+            
+        </div>
+    </div>
+
+    <!----------------profile-sidebar ---------------->
+    <div class="profile-sidebar">
+        <div class="sidebar-ad">
+            <small>Ad &middot; &middot; &middot;</small>
+            <br>
+            <p>Master the 5 principles of web design</p>
+            <div>
+                <img src="{% static 'images/user-1.png' %}">
+                <img src="{% static 'images/mi-logo.png' %}">
+            </div>
+            <b>Intake ongoing - Masters in IT</b>
+            <a href="#" class="ad-link">Learn More</a>
+        </div>
+        <div class="sidebar-people">
+            <h3>People you may know</h3>
+            <div class="sidebar-people-row">
+                <img src="{% static 'images/user-3.png' %}">
+                <div>
+                    <h2>Jane Doe</h2>
+                    <p>Student at Strathmore University</p>
+                    <a href="#">Connect</a>
+                </div>
+                
+            </div>
+            <div class="sidebar-people-row">
+                <img src="{% static 'images/user-4.png' %}">
+                <div>
+                    <h2>John Doe</h2>
+                    <p>Student at Strathmore University</p>
+                    <a href="#">Connect</a>
+                </div>
+                
+            </div>
+            <div class="sidebar-people-row">
+                <img src="{% static 'images/user-5.png' %}">
+                <div>
+                    <h2>Audrey Orengo</h2>
+                    <p>Student at Strathmore University</p>
+                    <a href="#">Connect</a>
+                </div>
+                
+            </div>
+            <div class="sidebar-people-row">
+                <img src="{% static 'images/user-2.png' %}">
+                <div>
+                    <h2>Presley Omeru</h2>
+                    <p>Student at Strathmore University</p>
+                    <a href="#">Connect</a>
+                </div>
+                
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+<div class="profile-footer">
+    <div class="sidebar-useful-links">
+        <a href="#">About</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Help Center</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Advertising</a>
+        <a href="#">Get the App</a>
+        <a href="#">More</a>
+
+        <div class="copyright-msg">
+            <img src="{% static 'images/logo.jpg' %}">
+            <p>Strathmore University &#169; 2022.All rights reserved</p>
+        </div>
+    </div>
+
+</div>
+   
+   <script>
+    let profileMenu = document.getElementById("profileMenu")
+
+    function toggleMenu(){
+        profileMenu.classList.toggle("open-menu")
+    }
+   </script>
+   
+</body>
+</html>

@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+[tabindex="-1"]:focus {
+    outline: none !important;
+}
+.header{
+    display: flex;
+    height: 100vh;
+    justify-content: left;
+    align-items: left;
+    padding: 10px;
+    background: rgba(160, 155, 155, 0.445);
+}
+.app-body{
+    max-width: 200px;
+    width: 100%;
+    background: rgb(35, 35, 41);
+    padding: 25px 30px;
+    border-radius: 5px;
+    display: inline;
+    position: left;
+}
+.nav-title{
+    color: white;
+}
+.profile{
+    color: white;
+    outline: none;
+    border: 0;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+.attachment{
+    color: white;
+    outline: none;
+    border: 0;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+.dashboard{
+    color: white;
+    outline: none;
+    border: 0;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+.logout{
+    margin-top: 1px;
+    margin-right: 2px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.app-footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+}
