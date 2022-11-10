@@ -96,7 +96,18 @@
                     <span>1 mutual connection: John Doe</span>
                 </div>
                 <div class="profile-btn">
-                    <a href="#" class="primary-btn"><img src="{% static 'images/connect.png' %}">Connect</a>
+                    <form action="/follow" method="POST">
+                        {% csrf_token %}
+
+                        <input type="hidden" value="{{user.username}}" name="follower" />
+                        <input type="hidden" value="{{user_object.username}}" name="user" />
+
+                        {% if user_object.username == user.username %}
+                        <a href="/settings" class="primary-btn"><button>Account settings</button></a>
+                        {% else %}
+                        <a  class="primary-btn"><img src="{% static 'images/connect.png' %}"><button type="submit">Connect</button></a>
+                        {% endif %}
+                    </form>
                     <a href="#"><img src="{% static 'images/chat.png' %}">Message</a>
                 </div>
             </div>
