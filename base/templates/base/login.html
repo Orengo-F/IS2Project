@@ -13,6 +13,9 @@
         <a href="{%url 'linkorg' %}" class="logo">{% load static %}<img src="{% static 'images/logo.jpg' %}"></a>
     </div>
     <div class="Host">
+        {% for message in messages %}
+        <h5>{{message}}</h5>
+        {% endfor %}
         <h1>Organization</h1>
         <br>
         <p>Log in to the system</p>
@@ -21,7 +24,7 @@
             {% csrf_token %}
             <input type="hidden" name="_token">
             <div class="inputhostlog1">
-                Email:    <input type="email" id="email" name="email" class="form-control" value placeholder="jane.doe@domain.com" autofocus>
+                Email:    <input type="email" id="username" name="username" class="form-control" value placeholder="jane.doe@domain.com" autofocus>
             </div>
             <br>
             <div class="inputhostlog2">
@@ -52,15 +55,21 @@
     
        </div>
        <div class="Others">
+        {% for message in messages %}
+        <h5>{{message}}</h5>
+        {% endfor %}
+       
+       
         <h1>Alumni & Volunteer</h1>
         <br>
         <p>Log in to the system</p>
         <br>
         <br>
-        <form method="POST" action="">
+        <form method="POST" action="{%url 'organization' %}">
+            {% csrf_token %}
             <input type="hidden" name="_token">
             <div class="input Alog1">
-                Email:    <input type="email" id="email" name="email" class="form-control" value placeholder="jane.doe@domain.com" autofocus>
+                Email:    <input type="email" id="username" name="username" class="form-control" value placeholder="jane.doe@domain.com" autofocus>
             </div>
             <br>
             <div class="input Alog2">
@@ -74,10 +83,9 @@
                 <a href="" class="presetalumni">Reset Password</a>
             </div>
             <br>
-            <div class="PReset">
-                <a href="" class="reg">Register</a>
-            </div>
-        </form>
+
+        </form> </div>
+
        </div>
     
     

@@ -21,6 +21,7 @@ class Profile(models.Model):
     skills = models.TextField(blank=True)
     internship = models.TextField(blank=True)
     profileimg = models.ImageField(upload_to='profile_images', default='blank-profile-picture.png')
+    mycv = models.FileField(upload_to='cvs')
 
     def __str__(self):
         return self.user.username

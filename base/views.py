@@ -32,15 +32,51 @@ def linkorg(request):
     user_profile = Profile.objects.get(user=user_object)  
 
     posts = Post.objects.all() 
-    return render(request,'base/linkorg.html',{'user_profile': user_profile, 'posts':posts})
+    return render(request,'base/linkorg.html',{'user_profile': user_profile, 'posts':posts,'user_object':user_object})
 @login_required(login_url='register')
 def linkinprofile(request):  
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)  
-    return render(request,'base/linkinprofile.html',{'user_profile': user_profile})
+
+
+
+    return render(request,'base/linkinprofile.html',{'user_profile': user_profile,'user_object':user_object})
 
 def organization(request):
-    return render(request,'base/organization.html')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('linkorg')
+        else:
+            messages.info(request, 'Invalid Credentials ')
+            return redirect('login')
+            
+
+    else:
+        return render(request, 'base/login.html')
+
+def alumni(request):
+    if request.method == 'POST':
+        username = request.POST['email']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('linkorg')
+        else:
+            messages.info(request, 'Invalid Credentials ')
+            return redirect('login')
+            
+
+    else:
+        return render(request, 'base/login.html')
 
 
 def studentreg(request):
@@ -184,11 +220,29 @@ def profile (request,pk):
     user_posts = Post.objects.filter(user=pk)
     user_post_length = len(user_posts)
 
+    follower = request.user.username
+    user=pk
+
+    if FollowersCount.objects.filter(follower=follower, user=user).first():
+        button_text = 'Remove connection'
+    else:
+        button_text='Connect'
+
+    user_followers =len(FollowersCount.objects.filter(user=pk))
+    user_following = len( FollowersCount.objects.filter(follower=pk))
+
+    
+
+
+
     context={
         'user_object':user_object,
         'user_profile': user_profile,
         'user_posts': user_posts,
         'user_post_length':user_post_length,
+        'button_text': button_text,
+        'user_followers': user_followers,
+        'user_following': user_following,
 
     }
 

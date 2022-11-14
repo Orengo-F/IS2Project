@@ -105,13 +105,21 @@
                         {% if user_object.username == user.username %}
                         <a href="/settings" class="primary-btn"><button>Account settings</button></a>
                         {% else %}
-                        <a  class="primary-btn"><img src="{% static 'images/connect.png' %}"><button type="submit">Connect</button></a>
+                        <a  class="primary-btn"><img src="{% static 'images/connect.png' %}"><button type="submit">{{ button_text }}</button></a>
                         {% endif %}
                     </form>
                     <a href="#"><img src="{% static 'images/chat.png' %}">Message</a>
                 </div>
             </div>
         </div>
+
+
+        <div class="profile-description">
+            <h2>MY CV</h2>
+            "{{user_profile.mycv.url}}"
+        </div>
+
+
         <div class="profile-description">
             <h2>About</h2>
             <p>{{user_profile.about}}</p>
