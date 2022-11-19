@@ -103,7 +103,7 @@
                         <input type="hidden" value="{{user_object.username}}" name="user" />
 
                         {% if user_object.username == user.username %}
-                        <a href="/settings" class="primary-btn"><button>Account settings</button></a>
+                        <a href="/settings" data-ripple="">Account Settings</a>
                         {% else %}
                         <a  class="primary-btn"><img src="{% static 'images/connect.png' %}"><button type="submit">{{ button_text }}</button></a>
                         {% endif %}

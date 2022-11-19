@@ -30,19 +30,21 @@
 
     <nav class="navbar">
         <div class="navbar-left">
-            <a href="linkorg.html" class="logo">{% load static %}<img src="{% static 'images/logo.jpg' %}"></a>
+            <form action="">
+            <a href="organization.html" class="logo">{% load static %}<img src="{% static 'images/logo.jpg' %}"></a>
 
             <div class="search-box">
                 <img src="{% static 'images/search.png' %}">
                 <input type="text" placeholder="Search">
+                <button type="submit"></button>
             </div>
 
         </div>
         <div class="navbar-center">
             <ul>
-                <li><a href="#" class="active-link"><img src="{% static 'images/home.png' %}"><span>Home</span></a></li>
-                <li><a href="#"><img src="{% static 'images/network.png' %}"><span>My Networks</span></a></li>
-                <li><a href="#"><img src="{% static 'images/jobs.png' %}"><span>Jobs</span></a></li>
+                <li><a href="/organization" class="active-link"><img src="{% static 'images/home.png' %}"><span>Home</span></a></li>
+                <li><a href="/orgprof"><img src="{% static 'images/network.png' %}"><span>My Networks</span></a></li>
+                <li><a href="/orgjobs"><img src="{% static 'images/jobs.png' %}"><span>Jobs</span></a></li>
                 <li><a href="#"><img src="{% static 'images/message.png' %}"><span>Messaging</span></a></li>
                 <li><a href="#"><img src="{% static 'images/notification.png' %}"><span>Notifications</span></a></li>
             </ul>
@@ -62,7 +64,7 @@
                 <br>
                 
     
-                <a href="{%url 'linkinprofile' %}">See your profile</a>
+                <a href="{%url 'orgprof' %}">See your profile</a>
             </div>
         </div>
         <hr>
@@ -112,7 +114,7 @@
                 <ul>
                     <li>Your profile views <span>0</span></li>
                     <li>Your post views <span>0</span></li>
-                    <li>Your connections views <span>0</span></li>
+                    <li>Your connections <span>{{ user_followers }}</span></li>
                     <li>Number of posts<span>{{ user_post_length }}</span></li>
                     
                     
@@ -123,50 +125,18 @@
                 <a href="#"><img src="{% static 'images/premium.png' %}">Try premium</a>
             </div>
         </div>
-        <div class="sidebar-activity">
-            <h3>RECENT</h3>
-            <a href="#"><img src="{% static 'images/recent.png' %}">Web Development</a>
-            <a href="#"><img src="{% static 'images/recent.png' %}">User interface</a>
-            <a href="#"><img src="{% static 'images/recent.png' %}">Online Learning</a>
-            <a href="#"><img src="{% static 'images/recent.png' %}">Code Better</a>
-            <a href="#"><img src="{% static 'images/recent.png' %}">Group Learning</a>
-            <h3>GROUPS</h3>
-            <a href="#"><img src="{% static 'images/group.png' %}">Web Design Group</a>
-            <a href="#"><img src="{% static 'images/group.png' %}">HTML & CSS Learners</a>
-            <a href="#"><img src="{% static 'images/group.png' %}">Python & JavaScript Group</a>
-            <a href="#"><img src="{% static 'images/group.png' %}">Learn Coding Online</a>
-            <h3>HASHTAG</h3>
-            <a href="#"><img src="{% static 'images/hashtag.png' %}">webdevelopment</a>
-            <a href="#"><img src="{% static 'images/hashtag.png' %}">userinterface</a>
-            <a href="#"><img src="{% static 'images/hashtag.png' %}">onlinelearnig</a>
-            <div class="discover-more-link">
-                <a href="#">Discover more</a>
-            </div>
-        </div>
+       
     </div>
 
 
     <div class="main-content">
         <div class="create-post">
-            <form action="upload" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-            <div class="create-post-input">
-                <img src="{{user_profile.profileimg.url}}">
-                <textarea rows="2" placeholder="Write a post" class="post_comment" name="caption"></textarea>
-            </div>
+
         
-                <div class="create-post-links">
-                    <li><img src="{% static 'images/photo.png' %}"><input type="file" name="image_upload" name="caption">Photo</li>
-                    <li><img src="{% static 'images/video.png' %}">Video</li>
-                    <li><img src="{% static 'images/event.png' %}">Event</li>
-                    <button class="postsubmit" type="submit">Post</button>
-                </div>
+
             </form>
         </div>
-        <div class="sort-by">
-            <hr>
-            <p>Sort by: <span>top <img src="{% static 'images/down-arrow.png' %}"></span></p>
-        </div>
+
         {% for post in posts reversed %}
         <div class="post">
             <div class="post-author">
@@ -375,6 +345,7 @@
                 </div>
             </div>
         </div>
+    </form>
 
 
     </div>
@@ -383,26 +354,6 @@
 
 
     <div class="right-sidebar">
-        <div class="sidebar-news">
-            <img src="{% static 'images/more.png' %}" class="info-icon">
-            <h3>Trending News</h3>
-            <a href="https://www.stridelearning.com/insights/most-in-demand-internships-IT.html">High demand for IT interns</a>
-            <span>1d ago &middot; 0 readers</span>
-
-            <a href="https://www.ibm.com/ibm/responsibility/2015/communities/skills_based_volunteering.html">IBM is looking for student volunteers</a>
-            <span>1h ago &middot; 0 readers</span>
-
-            <a href="https://scholarshipamerica.org/partners/scholarship-solutions/?utm_campaign=L_CD-Start-A-Scholarship-Dyn_B_JT&utm_medium=ppc&utm_term=&utm_source=adwords&hsa_kw=&hsa_acc=6301232930&hsa_mt=&hsa_net=adwords&hsa_src=g&hsa_cam=17844291295&hsa_ver=3&hsa_tgt=dsa-1696604662973&hsa_ad=612418492297&hsa_grp=138981033963&gclid=CjwKCAjwqJSaBhBUEiwAg5W9p4A1pX93Cuf-j5lRpcpcfdGOiqky5BacwSKKvBhqowF47aTa2UxD5RoCM-IQAvD_BwE">Get scholarships to US</a>
-            <span>5d ago &middot; 0 readers</span>
-
-            <a href="#">Great profile = Great internship and job opportunity?</a>
-            <span>18d ago &middot; 0 readers</span>
-
-            <a href="#">Felix Orengo, the story of how he made it</a>
-            <span>12h ago &middot; 0 readers</span>
-
-            <a href="#" class="read-more-link">Read More</a>
-        </div>
         <div class="sidebar-ad">
             <small>Ad &middot; &middot; &middot;</small>
             <br>

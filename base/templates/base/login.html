@@ -13,6 +13,11 @@
         <a href="{%url 'linkorg' %}" class="logo">{% load static %}<img src="{% static 'images/logo.jpg' %}"></a>
     </div>
     <div class="Host">
+        <style>
+            h5{
+                color: red;
+            }
+        </style>
         {% for message in messages %}
         <h5>{{message}}</h5>
         {% endfor %}
@@ -20,7 +25,7 @@
         <br>
         <p>Log in to the system</p>
         <br>
-        <form method="POST" action="{%url 'organization' %}">
+        <form method="POST" action="">
             {% csrf_token %}
             <input type="hidden" name="_token">
             <div class="inputhostlog1">
@@ -55,36 +60,21 @@
     
        </div>
        <div class="Others">
-        {% for message in messages %}
-        <h5>{{message}}</h5>
-        {% endfor %}
        
        
-        <h1>Alumni & Volunteer</h1>
-        <br>
-        <p>Log in to the system</p>
+        <h1>Alumni </h1>
         <br>
         <br>
-        <form method="POST" action="{%url 'organization' %}">
-            {% csrf_token %}
-            <input type="hidden" name="_token">
-            <div class="input Alog1">
-                Email:    <input type="email" id="username" name="username" class="form-control" value placeholder="jane.doe@domain.com" autofocus>
-            </div>
+        <br>
+        <p>You will need a strathmore email to log in</p><p>
             <br>
-            <div class="input Alog2">
-                Password: <input type="password" name="password" id="password" class="form-control" placeholder="*******">
-            </div>
             <br>
-            <div class="submit">
-                <button type="submit" class="btn btn-primary px-4">Login</button>
-            </div>
-            <div class="PReset">
-                <a href="" class="presetalumni">Reset Password</a>
-            </div>
             <br>
-
-        </form> </div>
+        <br>
+            <a href="{%url 'alumnilogin' %}" class="staff and students">Alumni Login</a></p>
+        <br>
+        <br>
+ </div>
 
        </div>
     

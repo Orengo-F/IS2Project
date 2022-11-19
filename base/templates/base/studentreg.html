@@ -1,41 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attachment</title>
-</head>
-<body>
-    <h1>Registration</h1>
+{% load static %}
 
-
-
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        <label for="">Admission</label>
-        <input type="text" name="username" id="username" Required>
-        <br>
-
-        <label for="">First Name</label>
-        <input type="text" name="fname" id="fname" Required>
-        <br>
-
-        <label for="">Last Name</label>
-        <input type="text" name="lname" id="lname" Required>
-        <br>
-
-        <label for="">Email Address</label>
-        <input type="email" name="email" id="email" Required>
-        <br>
-
-        <label for="">Password</label>
-        <input type="password" name="password" id="password" Required>
-        <br>
-
-        <button type="submit">Register</button>
-
-    </form>
-</body>
-</html>
+<div class="main-content">
+    <div class="create-post">
+        <form action="jobs" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="create-post-input">
+            <img src="{{user_profile.profileimg.url}}">
+            <textarea rows="2" placeholder="Write a post" class="post_comment" name="caption"></textarea>
+        </div>
+    
+            <div class="create-post-links">
+                <li><img src="{% static 'images/photo.png' %}"><input type="file" name="image_upload" name="caption">Photo</li>
+                <li><img src="{% static 'images/video.png' %}">Video</li>
+                <li><img src="{% static 'images/event.png' %}">Event</li>
+                <button class="postsubmit" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+    <div class="sort-by">
+        <hr>
+        <p>Sort by: <span>top <img src="{% static 'images/down-arrow.png' %}"></span></p>
+    </div>
+    {% for job in jobs reversed %}
+    <div class="post">
+        <div class="post-author">
+            <img src="{% static 'images/user-3.png' %}">
+            <div>
+                <h1><a href="#">{{job.user}}</a></h1>
+                <small>Developer of the game Running Aj | Game Developer</small>
+                <small>2 hours ago</small>
+            </div>
+        </div>
+        <p><a href="#"><strong>{{job.user}}</strong></a> {{job.caption}}
+        </p> 
+        <img src="{{job.image.url}}"  width="100%"> 
+        <div class="post-stats">
+            <div>
+                <img src="{% static 'images/thumbsup.png' %}">
+                <img src="{% static 'images/love.png' %}">
+                <img src="{% static 'images/clap.png' %}">
+                <span class="liked-users">
+                    {% if job.no_of_likes == 0 %}
+                    <p>No Likes</p>
+                    {% elif job.no_of_likes == 1 %}
+                    <p>Liked by {{job.no_of_likes}} person</p>
+                    {% else %}
+                    <p>Liked by {{job.no_of_likes}} people</p>
+                    {% endif %}
+                
+                
+                </span>
+            </div>
+            {% endfor %}

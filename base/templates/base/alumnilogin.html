@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni log in</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+</head>
+<body>
+    <div class="navbar-left">
+        <a href="{%url 'login' %}" class="logo">{% load static %}<img src="{% static 'images/logo.jpg' %}"></a>
+    </div>
+    <div class="others">
+        <style>
+            h5{
+                color: red;
+            }
+            .others{
+                margin: auto;
+                width: 50%;
+                background:rgb(236, 170, 27);
+                border: 3px solid green;
+                padding: 10px;
+            }
+        </style>
+        {% for message in messages %}
+        <h5>{{message}}</h5>
+        {% endfor %}
+        <h1>Alumni</h1>
+        <br>
+        <p>Log in to the system</p>
+        <br>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="hidden" name="_token">
+            <div class="inputhostlog1">
+                Email:    <input type="email" id="username" name="username" class="form-control" value placeholder="jane.doe@domain.com" autofocus>
+            </div>
+            <br>
+            <div class="inputhostlog2">
+                Password: <input type="password" name="password" id="password" class="form-control" placeholder="*******">
+            </div>
+            <br>
+            <div class="submit">
+                <button type="submit" class="btn">Login</button>
+            </div>
+            <div class="PReset">
+                <a href="" class="PReset">Reset Password</a>
+            </div>
+            <br>
+        </form>
+    </div>
+</body>
+</html>

@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login , logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import Profile,Post,LikePost, FollowersCount
+from .models import Profile,Post,LikePost, FollowersCount,Orgsettings,Jobs
 
 
 # Create your views here.
@@ -23,8 +23,23 @@ def studentmodule(request):
     return render(request,'base/studentmodule.html')
 
 
+
 def login(request):
-    return render(request,'base/login.html')
+    if request.method == 'POST':
+        username=request.POST['username']
+        password= request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request,user)
+            return redirect('organization')
+        else:
+            messages.info(request, 'Invalid Credentials ')
+            return redirect('login')
+    else:
+        return render(request, 'base/login.html')
+
 
 @login_required(login_url='register')
 def linkorg(request):
@@ -42,42 +57,25 @@ def linkinprofile(request):
 
     return render(request,'base/linkinprofile.html',{'user_profile': user_profile,'user_object':user_object})
 
+def orgprof(request):  
+    user_object = User.objects.get(username=request.user.username)
+    user_profile = Orgsettings.objects.get(user=user_object)  
+
+
+
+    return render(request,'base/orgprof.html',{'user_profile': user_profile,'user_object':user_object})
+
+
 def organization(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+    user_object = User.objects.get(username=request.user.username)
+    user_profile = Profile.objects.get(user=user_object)  
 
-        user = auth.authenticate(username=username, password=password)
+    posts = Post.objects.all() 
+    return render(request,'base/organization.html',{'user_profile': user_profile, 'posts':posts,'user_object':user_object})
+    return render(request,'base/organization.html')
 
-        if user is not None:
-            auth.login(request, user)
-            return redirect('linkorg')
-        else:
-            messages.info(request, 'Invalid Credentials ')
-            return redirect('login')
-            
 
-    else:
-        return render(request, 'base/login.html')
-
-def alumni(request):
-    if request.method == 'POST':
-        username = request.POST['email']
-        password = request.POST['password']
-
-        user = auth.authenticate(username=username, password=password)
-
-        if user is not None:
-            auth.login(request, user)
-            return redirect('linkorg')
-        else:
-            messages.info(request, 'Invalid Credentials ')
-            return redirect('login')
-            
-
-    else:
-        return render(request, 'base/login.html')
-
+    
 
 def studentreg(request):
     if request.method== "POST":
@@ -181,16 +179,15 @@ def settings(request):
 def upload(request):
     if request.method == 'POST':
         user = request.user.username
-        image= request.FILES.get('image_upload')
-        caption= request.POST['caption']
+        image = request.FILES.get('image_upload')
+        caption = request.POST['caption']
 
-        new_post= Post.objects.create(user=user, image=image,caption=caption)
+        new_post = Post.objects.create(user=user, image=image, caption=caption)
         new_post.save()
 
         return redirect('linkorg')
     else:
         return redirect('linkorg')
-    return HttpResponse('<h1> Upload View </h1>')
 
 def like_post(request):
     
@@ -265,3 +262,90 @@ def follow(request):
     else:
         return redirect('linkinprofile')
 
+def orgjobs(request):
+    user_object = User.objects.get(username=request.user.username)
+    user_profile = Profile.objects.get(user=user_object)  
+
+    jobs = Jobs.objects.all() 
+    return render(request,'base/orgjobs.html',{'user_profile': user_profile, 'jobs':jobs,'user_object':user_object})
+
+
+
+
+def chats(request):
+    context={}
+    return render(request,'base/chat.html',context)
+
+def base(request):
+    context={}
+    return render(request,'base/base.html',context)
+
+def details(request):
+    return render(request,'base/detail.html')
+
+def studentjobs(request):
+    user_object = User.objects.get(username=request.user.username)
+    user_profile = Profile.objects.get(user=user_object)  
+
+    jobs = Jobs.objects.all() 
+    return render(request,'base/studentjobs.html',{'user_profile': user_profile, 'jobs':jobs,'user_object':user_object})
+
+def orgsettings(request):
+    user_profile=Orgsettings.objects.get(user=request.user)
+
+    if request.method == 'POST':
+
+        if request.FILES.get('image') == None:
+            image = user_profile.orgimg
+            about = request.POST['about']
+            email = request.POST['email']
+
+
+            user_profile.orgimg =image
+            user_profile.about=about
+            user_profile.email=email
+            user_profile.save()
+
+        if request.FILES.get('image') != None:
+            image = request.FILES.get('image')
+            about = request.POST['about']
+            email = request.POST['email']
+
+            user_profile.orgimg =image
+            user_profile.about=about
+            user_profile.email=email
+            user_profile.save()
+
+        return redirect('orgsettings')
+
+
+    return render(request,'base/orgsettings.html')
+
+def jobs(request):
+    if request.method == 'POST':
+        user = request.user.username
+        image = request.FILES.get('image_upload')
+        caption = request.POST['caption']
+
+        new_post = Jobs.objects.create(user=user, image=image, caption=caption)
+        new_post.save()
+
+        return redirect('orgjobs')
+    else:
+        return redirect('orgjobs')
+
+def alumnilogin(request):
+    if request.method == 'POST':
+        username=request.POST['username']
+        password= request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request,user)
+            return redirect('organization')
+        else:
+            messages.info(request, 'Invalid Credentials ')
+            return redirect('alumnilogin')
+    else:
+        return render(request,'base/alumnilogin.html')
